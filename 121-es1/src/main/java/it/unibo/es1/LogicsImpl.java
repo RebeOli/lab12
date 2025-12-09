@@ -1,13 +1,17 @@
 package it.unibo.es1;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Implementation of the Logics interface.
  */
 public class LogicsImpl implements Logics {
 
-    private static final String ERROR_MESSAGE = "Unimplemented method";
+    //private static final String ERROR_MESSAGE = "Unimplemented method";
+    private final int size;
+    List<Integer> list;
 
     /**
      * Constructor.
@@ -15,7 +19,12 @@ public class LogicsImpl implements Logics {
      * @param size the size of the logics
      */
     public LogicsImpl(final int size) {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        Objects.requireNonNull(size);
+        this.size = size;
+        list = new ArrayList<>(this.size);
+        for (int i=0; i<size; i++) {
+            list.add(0);
+        }
     }
 
     /**
@@ -23,7 +32,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public int size() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return  this.size;
     }
 
     /**
@@ -31,7 +40,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public List<Integer> values() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return this.list;
     }
 
     /**
@@ -39,7 +48,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public List<Boolean> enabledStates() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return this.list.stream().map(e -> e.compareTo(size)).map(e -> e < 0 ).toList();
     }
 
     /**
@@ -47,7 +56,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public int hit(final int elem) {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return this.list.set(elem, this.list.get(elem) + 1);
     }
 
     /**
@@ -55,7 +64,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public String result() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        return this.list.toString();
     }
 
     /**
@@ -63,6 +72,11 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public boolean toQuit() {
-        throw new UnsupportedOperationException(ERROR_MESSAGE);
+        for (Integer i : this.values()) {
+            if(i <= size) {
+                return false;
+            }
+        }
+        return true;
     }
 }
