@@ -11,7 +11,7 @@ public class LogicsImpl implements Logics {
 
     //private static final String ERROR_MESSAGE = "Unimplemented method";
     private final int size;
-    List<Integer> list;
+    private final List<Integer> list;
 
     /**
      * Constructor.
@@ -22,7 +22,7 @@ public class LogicsImpl implements Logics {
         Objects.requireNonNull(size);
         this.size = size;
         list = new ArrayList<>(this.size);
-        for (int i=0; i<size; i++) {
+        for (int i = 0; i < size; i++) {
             list.add(0);
         }
     }
@@ -32,7 +32,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public int size() {
-        return  this.size;
+        return this.size;
     }
 
     /**
@@ -40,7 +40,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public List<Integer> values() {
-        return this.list;
+        return List.copyOf(this.list);
     }
 
     /**
@@ -48,7 +48,7 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public List<Boolean> enabledStates() {
-        return this.list.stream().map(e -> e.compareTo(size)).map(e -> e < 0 ).toList();
+        return this.list.stream().map(e -> e.compareTo(size)).map(e -> e < 0).toList();
     }
 
     /**
@@ -73,8 +73,8 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public boolean toQuit() {
-        for (Integer i : this.values()) {
-            if(i <= size) {
+        for (final Integer i : this.values()) {
+            if (i <= size) {
                 return false;
             }
         }
