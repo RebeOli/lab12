@@ -1,7 +1,11 @@
 package it.unibo.es2;
 
+/**
+ * Interface defining the logic.
+ */
 public interface Logics {
-     /**
+
+    /**
      * The number of slots.
      *
      * @return the number of slots
@@ -9,16 +13,18 @@ public interface Logics {
     int size();
 
     /**
-     * Increment the value of the specified slot.
+     * Change the value of a button.
      *
-     * @param elem the slot to increment
-     * @return the new value a button should show after being pressed
+     * @param pair coordinates of the button.
+     * @return the new value a button should show after being pressed.
      */
-    String hit(Pair<Integer,Integer> pair);
+    String hit(Pair<Integer, Integer> pair);
+
     /**
-     * True if it is time to quit (i.e., one of the line or column is full).
-     *
-     * @return whether it is time to quit
+     * True if it is time to quit (i.e., one of the row or column is full).
+     * 
+     * @param pair coordinates of the button.
+     * @return whether it is time to quit.
      */
-    boolean toQuit(Pair<Integer,Integer> pair);
+    boolean toQuit(Pair<Integer, Integer> pair);
 }

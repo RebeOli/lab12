@@ -38,7 +38,7 @@ public final class GUI extends JFrame {
                 button.addActionListener(e -> {
                     final Pair<Integer, Integer> buttonPosition = buttons.get(button);
                     button.setText(logics.hit(buttonPosition));
-                    if(logics.toQuit(buttonPosition)){
+                    if (logics.toQuit(buttonPosition)) {
                         dispose();
                     }
                 });
