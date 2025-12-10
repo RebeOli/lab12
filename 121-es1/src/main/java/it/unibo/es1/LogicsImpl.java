@@ -56,7 +56,8 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public int hit(final int elem) {
-        return this.list.set(elem, this.list.get(elem) + 1);
+        this.list.set(elem, this.list.get(elem) + 1);
+        return this.list.get(elem);
     }
 
     /**
