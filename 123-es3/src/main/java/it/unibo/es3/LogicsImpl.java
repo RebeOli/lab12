@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 
-
 /**
  * Implementation of the Logics interface.
  */
@@ -21,7 +20,7 @@ public class LogicsImpl implements Logics, Serializable {
     private static final String STAR = "*";
     private final int size;
     private final Map<Pair<Integer, Integer>, String> map = new LinkedHashMap<>();
-    private List<Pair<Integer, Integer>> list = new ArrayList<>();
+    private final List<Pair<Integer, Integer>> list = new ArrayList<>();
 
     /**
      * Constructor.
@@ -49,20 +48,22 @@ public class LogicsImpl implements Logics, Serializable {
     public int size() {
         return this.size;
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public Pair<Integer, Integer> random(){
-        RandomGenerator random = new Random();
+    public Pair<Integer, Integer> random() {
+        final RandomGenerator random = new Random();
         Pair<Integer, Integer> pair;
-        do{
+        do {
             final int x = random.nextInt(size);
             final int y = random.nextInt(size);
-            pair = new Pair<>(x,y);
-        } while(STAR.equals(map.get(pair)));
+            pair = new Pair<>(x, y);
+        } while (STAR.equals(map.get(pair)));
         return pair;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -71,32 +72,38 @@ public class LogicsImpl implements Logics, Serializable {
         map.put(pair, STAR);
         return STAR;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<Pair<Integer, Integer>> fill(){
-        for (final Pair<Integer, Integer> pair : this.map.keySet()){
-            if(STAR.equals(map.get(pair))){
-                for (int i = pair.x()-1; i<=pair.x()+1; i++){
-                    for (int j = pair.y()-1; j<=pair.y()+1; j++){
-                        Pair <Integer, Integer> newPair = new Pair<>(i, j);
-                        if(map.containsKey(newPair) && !STAR.equals(map.get(newPair))){
+    public List<Pair<Integer, Integer>> fill() {
+        for (final Map.Entry<Pair<Integer, Integer>, String> entry : this.map.entrySet()) {
+            if (STAR.equals(entry.getValue())) {
+                final Pair<Integer, Integer> pair = entry.getKey();
+                for (int i = pair.x() - 1; i <= pair.x() + 1; i++) {
+                    for (int j = pair.y() - 1; j <= pair.y() + 1; j++) {
+                        final Pair<Integer, Integer> newPair = new Pair<>(i, j);
+                        if (map.containsKey(newPair) && !STAR.equals(map.get(newPair))) {
                             list.add(newPair); 
                         }
                     }
                 }
             }
         }
-        for (Pair<Integer, Integer> pair : list){
+        for (final Pair<Integer, Integer> pair : list) {
             map.put(pair, STAR);
         }
         return List.copyOf(list);
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean toQuit() {
-        for (final Pair<Integer, Integer> pair : this.map.keySet()){
-            if(!STAR.equals(map.get(pair))){
+        for (final String values : this.map.values()) {
+            if (!STAR.equals(values)) {
                 return false;
             }
         }

@@ -13,12 +13,13 @@ public interface Logics {
      * @return the number of slots
      */
     int size();
+
     /**
      * Generated 3 *.
      *
      * @return the number of slots
      */
-    Pair <Integer, Integer> random();
+    Pair<Integer, Integer> random();
 
     /**
      * Fill the button.
@@ -26,17 +27,18 @@ public interface Logics {
      * @return the coordinates of the button. 
      */
     List<Pair<Integer, Integer>> fill();
+
     /**
      * Change the value of a button.
-     *
+     * 
+     * @param pair coordinates of the button.
      * @return the new value a button should show after being pressed.
      */
-    String star(final Pair<Integer, Integer> pair);
+    String star(Pair<Integer, Integer> pair);
 
     /**
      * True if it is time to quit (i.e., one of the row or column is full).
-     * 
-     * @param pair coordinates of the button.
+     *
      * @return whether it is time to quit.
      */
     boolean toQuit();

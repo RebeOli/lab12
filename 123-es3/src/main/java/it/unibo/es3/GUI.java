@@ -19,7 +19,6 @@ public final class GUI extends JFrame {
     private static final long serialVersionUID = 1L;
     private final List<JButton> cells = new ArrayList<>();
     private final Logics logics;
-    private Pair<Integer, Integer> buttonPosition;
 
     /**
      * Constructor.
@@ -47,26 +46,26 @@ public final class GUI extends JFrame {
         //creo la griglia vuota
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < width; j++) {
-                final var pos = new Pair<>(j, i);
                 final JButton button = new JButton(" ");
                 this.cells.add(button);
                 panelUp.add(button);
             }
         }
         //genero i tre *
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
+            final Pair<Integer, Integer> buttonPosition;
             buttonPosition = logics.random();
-            int index = buttonPosition.y()*10 + buttonPosition.x();
+            final int index = buttonPosition.y() * 10 + buttonPosition.x();
             this.cells.get(index).setText(logics.star(buttonPosition));
         }
         hitButton.addActionListener(e -> {
-            if(logics.toQuit()){
+            if (logics.toQuit()) {
                 dispose();
             } else {
-                List<Pair<Integer, Integer>> listPosition = new ArrayList<>();
+                final List<Pair<Integer, Integer>> listPosition;
                 listPosition = logics.fill();
-                for (Pair<Integer, Integer> pair : listPosition){
-                    int index = pair.y()*10 + pair.x();
+                for (final Pair<Integer, Integer> pair : listPosition) {
+                    final int index = pair.y() * 10 + pair.x();
                     this.cells.get(index).setText(logics.star(pair));
                 }
             }
