@@ -65,7 +65,12 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public String result() {
-        return this.list.toString();
+        String res = "<<";
+        for (int i = 0; i < size; i++) {
+            res = res + this.list.get(i) + "|";
+        }
+        res = res + ">>";
+        return res;
     }
 
     /**
