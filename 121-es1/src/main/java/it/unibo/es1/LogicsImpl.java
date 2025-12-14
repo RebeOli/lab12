@@ -67,10 +67,10 @@ public class LogicsImpl implements Logics {
     public String result() {
         final StringBuilder res = new StringBuilder();
         res.append("<<");
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size - 1; i++) {
             res.append(this.list.get(i)).append('|');
         }
-        return res.append(">>").toString();
+        return res.append(this.list.getLast()).append(">>").toString();
     }
 
     /**
