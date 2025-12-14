@@ -65,12 +65,12 @@ public class LogicsImpl implements Logics {
      */
     @Override
     public String result() {
-        String res = "<<";
+        final StringBuilder res = new StringBuilder();
+        res.append("<<");
         for (int i = 0; i < size; i++) {
-            res = res + this.list.get(i) + "|";
+            res.append(this.list.get(i)).append('|');
         }
-        res = res + ">>";
-        return res;
+        return res.append(">>").toString();
     }
 
     /**
